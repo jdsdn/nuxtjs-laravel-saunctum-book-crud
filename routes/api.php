@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'API\RegisterController@register');
 Route::post('login', 'API\RegisterController@login');
    
-Route::middleware('auth:api')->group( function () {
+Route::middleware('auth:sanctum')->group( function () {
     Route::resource('authors', 'API\AuthorController');
     Route::resource('books', 'API\BookController');
 });

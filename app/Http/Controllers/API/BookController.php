@@ -13,7 +13,7 @@ class BookController extends BaseController
 {
     /**
      * Display a listing of the resource.
-     *
+     *f
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -93,11 +93,12 @@ class BookController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());       
         }
    
-        $book->fname = $input['fname'];
-        $book->lname = $input['lname'];
-        $book->description = $input['description'];
+        $book->author_id = $input['author_id'];
+        $book->title = $input['title'];
+        $book->isbn = $input['isbn'];
+        $book->publisher = $input['publisher'];
         $book->save();
-   
+
         return $this->sendResponse(new BookResource($book), 'Book updated successfully.');
     }
    

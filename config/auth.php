@@ -113,19 +113,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
-    /*
-        adding api auth configuration
-    */
-
-    'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-        'api' => [
-            'driver' => 'passport',
-            'provider' => 'users',
-        ],
-    ],
 ];

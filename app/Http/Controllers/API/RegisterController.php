@@ -29,7 +29,7 @@ class RegisterController extends BaseController {
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
+        $success['token'] =  $user->createToken('user-token')->plainTextToken;
         $success['name'] =  $user->name;
    
         return $this->sendResponse($success, 'User register successfully.');
@@ -41,14 +41,14 @@ class RegisterController extends BaseController {
      * @return \Illuminate\Http\Response
      */
     public function login(Request $request) {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){ 
-            $user = Auth::user(); 
-            $success['token'] =  $user->createToken('MyApp')-> accessToken; 
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('user-token')->plainTextToken;
             $success['name'] =  $user->name;
    
             return $this->sendResponse($success, 'User login successfully.');
         } 
-        else{ 
+        else {
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
     }
