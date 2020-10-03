@@ -21,7 +21,7 @@ class BookController extends BaseController
         // $book = Book::all();
 
         $book = DB::table('books')
-            ->join('authors', 'books.author_id', '=', 'authors.id')
+            ->leftjoin('authors', 'books.author_id', '=', 'authors.id')
             ->select('books.*', 'authors.fname', 'authors.lname')
             ->get()
             ->toArray();

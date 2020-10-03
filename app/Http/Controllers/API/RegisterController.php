@@ -31,6 +31,7 @@ class RegisterController extends BaseController {
         $user = User::create($input);
         $data['token'] =  $user->createToken('user-token')->plainTextToken;
         $data['name'] =  $user->name;
+        $data['email'] =  $user->email;
    
         return $this->sendResponse($data, 'User register successfully.');
     }
@@ -45,11 +46,22 @@ class RegisterController extends BaseController {
             $user = Auth::user();
             $data['token'] =  $user->createToken('user-token')->plainTextToken;
             $data['name'] =  $user->name;
+            $data['email'] =  $user->email;
    
             return $this->sendResponse($data, 'User login successfully.');
         } 
         else {
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         } 
+    }
+
+    public function logout() {
+        // $user = Auth::user();
+        // $user->tokens()->delete();
+        $data['status'] = "Success";
+
+        return $this->sendResponse($data, 'User Logout successfully.');
+        // if(Auth::attempt(['email' => $request->email])) {
+        // } 
     }
 }
